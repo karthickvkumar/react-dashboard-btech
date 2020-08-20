@@ -17,6 +17,28 @@ class ListItems extends Component {
                 location: false,
             },
             status: false,
+            userList: [
+                {
+                    "name": "Mr.A",
+                    "age": 21,
+                    "position": "Java Developer"
+                },
+                {
+                    "name": "Mr.B",
+                    "age": 22,
+                    "position": "UI Developer"
+                },
+                {
+                    "name": "Mr.C",
+                    "age": 25,
+                    "position": "React Developer"
+                },
+                {
+                    "name": "Mr.D",
+                    "age": 20,
+                    "position": "C# Developer"
+                }
+            ]
         }
     }
 
@@ -51,7 +73,6 @@ class ListItems extends Component {
     }
 
     disableLocation = () => {
-
         this.setState({
             status: !this.state.status
         })
@@ -59,10 +80,21 @@ class ListItems extends Component {
 
     render() {
         let { resister_date, error } = this.state;
-
+        let userItems = this.state.userList.map((value, index) => {
+            return (
+                <div key={index}>
+                    <h3>The user name is {value.name}</h3>
+                    <h3>The user age is {value.age}</h3>
+                    <span>---------------------------</span>
+                </div>
+            )
+        });
+        console.log(userItems)
         return (
             <div>
-                <form onSubmit={this.onSubmitForm}>
+                <h1>User Infomation:</h1>
+                {userItems}
+                {/* <form onSubmit={this.onSubmitForm}>
                     <h3>The User Name is : {resister_date.name}</h3>
                     <input type="text" name="name" placeholder="Please enter name.." onChange={this.handleDate} value={resister_date.name} onBlur={this.onBlurInput} onFocus={this.onFocusInput} />
 
@@ -92,7 +124,7 @@ class ListItems extends Component {
                     <br></br>
 
                     <input type="submit" value="SEND" />
-                </form>
+                </form> */}
             </div>
         );
     }
