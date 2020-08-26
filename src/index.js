@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HomePage from './pages/home-page';
-import ProfilePage from './pages/profile-page';
+import NewsPage from './pages/news-page';
 
 import './index.css';
 
 const App = () => {
   return (
     <div>
-      <h2>Welcome to React</h2>
-      <ProfilePage></ProfilePage>
+      <NewsPage></NewsPage>
     </div>
   )
 }
