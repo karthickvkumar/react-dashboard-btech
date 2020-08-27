@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import NewsPage from './pages/news-page';
+import SignupPage from './pages/signup-page';
 
 import './index.css';
 
 const App = () => {
   return (
     <div>
-      <NewsPage></NewsPage>
+      <SignupPage></SignupPage>
     </div>
   )
 }
