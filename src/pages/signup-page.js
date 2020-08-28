@@ -19,53 +19,73 @@ class SignupPage extends Component {
     }
 
     handleState = (event) => {
+        let stateObj = JSON.parse(event.target.value)
+        let data = { ...this.state.register, city: '', state: stateObj.name };
         this.setState({
-            selectedState: event.target.value
+            selectedState: stateObj.state_code,
+            register: data
         })
+
+    }
+
+    handleChange = (event) => {
+        let data;
+        if (Array.isArray(this.state.register[event.target.name])) {
+            if (event.target.checked) {
+                this.state.register.hobbies.push(event.target.value);
+            }
+            else {
+                this.state.register.hobbies.pop();
+            }
+            data = { ...this.state.register, hobbies: this.state.register.hobbies };
+        }
+        else {
+            data = { ...this.state.register, [event.target.name]: event.target.value };
+        }
+        this.setState({
+            register: data
+        })
+    }
+
+    onSubmit = () => {
+        console.log(this.state.register);
     }
 
     render() {
         const states = [
-            { name: 'Tamil Nadu', country_code: 'IN' },
-            { name: 'Kerala', country_code: 'IN' },
-            { name: 'Maharstra', country_code: 'IN' },
-            { name: 'Washington', country_code: 'USA' },
-            { name: 'Chicago', country_code: 'USA' },
-            { name: 'Texas', country_code: 'USA' },
-            { name: 'State - 1 Japan', country_code: 'JN' },
-            { name: 'State - 2 Japan', country_code: 'JN' },
-            { name: 'State - 3 Japan', country_code: 'JN' },
-            { name: 'State - 1 China', country_code: 'CH' },
-            { name: 'State - 2 China', country_code: 'CH' },
-            { name: 'State - 3 China', country_code: 'CH' },
-            { name: 'State - 1 France', country_code: 'FR' },
-            { name: 'State - 2 France', country_code: 'FR' },
-            { name: 'State - 3 France', country_code: 'FR' },
+            { name: 'Tamil Nadu', state_code: 'TN' },
+            { name: 'Kerala', state_code: 'KL' },
+            { name: 'Maharstra', state_code: 'MH' },
+            { name: 'Karnataka', state_code: 'KA' }
         ];
 
         const cities = [
-            { name: 'Chennai', country_code: 'IN' },
-            { name: 'Banglore', country_code: 'IN' },
-            { name: 'Mysore', country_code: 'IN' },
-            { name: 'New York', country_code: 'USA' },
-            { name: 'Los Angles', country_code: 'USA' },
-            { name: 'Indiana', country_code: 'USA' },
-            { name: 'Tokyo', country_code: 'JN' },
-            { name: 'Beijin', country_code: 'CH' },
-            { name: 'Paris', country_code: 'FR' },
+            { name: 'Chennai', state_code: 'TN' },
+            { name: 'Coimbatore', state_code: 'TN' },
+            { name: 'Erode', state_code: 'TN' },
+            { name: 'Madurai', state_code: 'TN' },
+            { name: 'Banglore', state_code: 'KA' },
+            { name: 'Mysore', state_code: 'KA' },
+            { name: 'Hubli', state_code: 'KA' },
+            { name: 'Cochin', state_code: 'KL' },
+            { name: 'Calicut', state_code: 'KL' },
+            { name: 'Munnar', state_code: 'KL' },
+            { name: 'Mumbai', state_code: 'MH' },
+            { name: 'Pune', state_code: 'MH' },
+            { name: 'Nashik', state_code: 'MH' },
         ];
 
         let stateList = states.map((state, index) => {
             return (
-                <option key={index} value={state.country_code}>{state.name}</option>
+                <option key={index} value={JSON.stringify(state)}>{state.name}</option>
             )
         });
 
         let filterCity = cities.filter((city) => {
-            return city.country_code == this.state.selectedState;
+            return city.state_code === this.state.selectedState;
         }).map((city, index) => {
             return (
-                <option key={index}>{city.name}</option>
+                <option key={index} value={city.name}>{city.name}</option>
             )
         })
 
@@ -75,39 +95,39 @@ class SignupPage extends Component {
             <div className="warpper">
                 <h2>Registation Page</h2>
                 <label>Enter Name:</label>
-                <input type="text" placeholder="Enter your name.." />
+                <input type="text" placeholder="Enter your name.." name="name" onChange={this.handleChange} />
                 <br></br>
                 <label>Enter Age:</label>
-                <input type="number" placeholder="Enter your age.." />
+                <input type="number" placeholder="Enter your age.." name="age" onChange={this.handleChange} />
                 <br></br>
                 <label>Enter Email:</label>
-                <input type="text" placeholder="Enter your email.." />
+                <input type="text" placeholder="Enter your email.." name="email" onChange={this.handleChange} />
                 <br></br>
                 <label>Select Gender:</label>
-                <input type="radio" name="gender" />Male
-                <input type="radio" name="gender" />Female
-                <input type="radio" name="gender" />Others
+                <input type="radio" name="gender" onChange={this.handleChange} value="male" />Male
+                <input type="radio" name="gender" onChange={this.handleChange} value="female" />Female
+                <input type="radio" name="gender" onChange={this.handleChange} value="others" />Others
                 <br></br>
                 <label>Pick Hobbies:</label>
-                <input type="checkbox" />Cricket
-                <input type="checkbox" />Football
-                <input type="checkbox" />BasketBall
-                <input type="checkbox" />Hockey
-                <input type="checkbox" />Tennis
+                <input type="checkbox" name="hobbies" onChange={this.handleChange} value="circker" />Cricket
+                <input type="checkbox" name="hobbies" onChange={this.handleChange} value="football" />Football
+                <input type="checkbox" name="hobbies" onChange={this.handleChange} value="basketball" />BasketBall
+                <input type="checkbox" name="hobbies" onChange={this.handleChange} value="hockey" />Hockey
+                <input type="checkbox" name="hobbies" onChange={this.handleChange} value="tennis" />Tennis
                 <br></br>
                 <label>Select State:</label>
-                <select onChange={this.handleState}>
-                    <option disabled selected>Select any one State</option>
+                <select onChange={this.handleState} defaultValue={""} name="state">
+                    <option disabled value="">Select any one State</option>
                     {stateList}
                 </select>
                 <br></br>
                 <label>Select City:</label>
-                <select>
-                    <option disabled selected>Select any one City</option>
+                <select value={register.city} onChange={this.handleChange} name="city">
+                    <option disabled value="">Select any one City</option>
                     {filterCity}
                 </select>
                 <br></br>
-                <button>Submit</button>
+                <button onClick={() => this.onSubmit()}>Submit</button>
             </div>
         );
     }
