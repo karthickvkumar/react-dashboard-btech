@@ -5,7 +5,12 @@ import ApiService from '../services/api';
 
 
 class ApiPage extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: 'Mr.John'
+        }
+    }
     async listUser() {
         const url1 = "https://reqres.in/api/users/2";
 
@@ -16,7 +21,7 @@ class ApiPage extends Component {
         }
         let response = await ApiService.getAPI(url1);
         let result = await ApiService.postUser(url2, data);
-        console.log(response, result)
+        console.log(response)
 
         // ApiService.getAPI(url)
         //     .then((response) => {
@@ -43,13 +48,43 @@ class ApiPage extends Component {
             })
     }
 
+    componentWillMount() {
+        console.log('This is componentWillMount Method')
+    }
+
+    componentDidMount() {
+        this.listUser();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('This is shouldComponentUpdate Method')
+        console.log(nextState, this.state)
+        if (this.state.name == nextState.name) {
+            return false
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    updateName() {
+        this.setState({
+            name: 'Mr.Johndsd'
+        })
+    }
+
     render() {
+        console.log('This is Render Method')
         return (
             <div>
-                <h2>Fetch data from Server</h2>
-                {/* <button onClick={() => { this.updateName() }}>Update</button> */}
+                {/* <h2>Fetch data from Server</h2>
+                <h2>{this.state.name}</h2>
+                <button onClick={() => { this.updateName() }}>Update</button>
+
                 <button onClick={() => { this.listUser() }}>Load Data</button>
-                <button onClick={() => { this.postUser() }}>Post Data</button>
+                <button onClick={() => { this.postUser() }}>Post Data</button> */}
+                <h2>Page Not Found</h2>
             </div>
         );
     }

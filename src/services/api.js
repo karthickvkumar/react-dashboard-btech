@@ -2,8 +2,13 @@ import axios from 'axios';
 
 class ApiService {
     async getAPI(url) {
-        let response = await axios.get(url);
-        return response;
+        let response = await fetch(url, { method: 'GET' });
+        let finalResponse = await response.json();
+        return finalResponse;
+
+        // let response = await axios.get(url);
+        // return response;
+
         // return axios.get(url)
         //     .then((response) => {
         //         return response;
