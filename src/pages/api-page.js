@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Layout from '../components/layout';
+
 import ApiService from '../services/api';
 
 
@@ -74,17 +76,26 @@ class ApiPage extends Component {
         })
     }
 
+    componentWillUpdate() {
+        console.log('This is componentWillUpdate Method')
+    }
+
+    componentDidUpdate() {
+        console.log('This is componentDidUpdate Method')
+    }
+
     render() {
-        console.log('This is Render Method')
+        console.log('This is Render Method in PARETN')
         return (
             <div>
-                {/* <h2>Fetch data from Server</h2>
+                <h2>Fetch data from Server</h2>
                 <h2>{this.state.name}</h2>
                 <button onClick={() => { this.updateName() }}>Update</button>
 
                 <button onClick={() => { this.listUser() }}>Load Data</button>
-                <button onClick={() => { this.postUser() }}>Post Data</button> */}
-                <h2>Page Not Found</h2>
+                <button onClick={() => { this.postUser() }}>Post Data</button>
+
+                <Layout user={this.state.name}></Layout>
             </div>
         );
     }

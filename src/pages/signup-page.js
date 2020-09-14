@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
 import '../css/signup.css';
 
 class SignupPage extends Component {
@@ -49,8 +48,7 @@ class SignupPage extends Component {
     }
 
     onSubmit = () => {
-        console.log(this.state.register);
-        this.props.history.push('/home')
+        this.props.history.push('/home', this.state.register);
     }
 
     render() {
@@ -130,7 +128,6 @@ class SignupPage extends Component {
                 </select>
                 <br></br>
                 <button onClick={() => this.onSubmit()}>Submit</button>
-                <NavLink to="/feeds" className="button">Go to News Feeds</NavLink>
             </div>
         );
     }

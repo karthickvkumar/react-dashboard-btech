@@ -1,27 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import SignupPage from './pages/signup-page';
-import NewsPage from './pages/news-page';
 import HomePage from './pages/home-page';
+import NewsPage from './pages/news-page';
 import ApiPage from './pages/api-page';
+import SingleUser from './pages/single-user';
+import PageNotFound from './components/page-not-found';
 
 import './index.css';
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={SignupPage}></Route>
-          <Route path="/feeds" component={NewsPage}></Route>
-          <Route path="/home" component={HomePage}></Route>
-          <Route component={ApiPage}></Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={SignupPage}></Route>
+        <Route path="/home" component={HomePage}></Route>
+        <Route path="/feeds" component={NewsPage}></Route>
+        <Route path="/api" component={ApiPage}></Route>
+        <Route path="/user/:userId" component={SingleUser}></Route>
+        <Route component={PageNotFound}></Route>
+      </Switch>
+    </BrowserRouter>
 
   )
 }

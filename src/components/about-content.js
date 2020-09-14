@@ -1,0 +1,13 @@
+import React, { Component } from 'react';
+
+class AboutContent extends Component {
+    render() {
+        return (
+            <div>
+                <h1>About Contnet Page</h1>
+            </div>
+        );
+    }
+}
+
+export default AboutContent;
