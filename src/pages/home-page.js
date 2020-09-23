@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink, withRouter } from 'react-router-dom'
+import { NavLink, Route, Switch } from 'react-router-dom'
 import ApiService from '../services/api';
 
 import HomeContent from '../components/home-content';
 import AboutContent from '../components/about-content';
 import SettingsContent from '../components/settings-content';
+
 
 class HomePage extends Component {
     constructor(props) {
@@ -25,15 +26,11 @@ class HomePage extends Component {
         })
     }
 
-    navigate(user) {
-        let url = "/user/" + user.id;
-        this.props.history.push(url)
-
+    nextPage(path) {
+        this.props.history.push(path);
     }
 
     render() {
-        // console.log(this.props.history.location.state)
-        // let stateDate = this.props.history.location.state;
         let users = this.state.userList.map((value, index) => {
             return (
                 <tr key={index} onClick={() => this.navigate(value)}>
@@ -44,7 +41,22 @@ class HomePage extends Component {
         })
         return (
             <div>
-                <table>
+                <div className="header">Header Message</div>
+                <div className="wrapper">
+                    <div className="sidebar">
+                        <NavLink to="/home" className="nav-btn" activeClassName="active-btn" exact={true}>Home</NavLink>
+                        <NavLink to="/home/about" className="nav-btn" activeClassName="active-btn">About</NavLink>
+                        <NavLink to="/home/settings" className="nav-btn" activeClassName="active-btn">Settings</NavLink>
+                    </div>
+                    <div className="content">
+                        <Switch>
+                            <Route path="/home" exact component={HomeContent}></Route>
+                            <Route path="/home/about" component={AboutContent}></Route>
+                            <Route path="/home/settings" component={SettingsContent}></Route>
+                        </Switch>
+                    </div>
+                </div>
+                {/* <table>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -56,7 +68,7 @@ class HomePage extends Component {
                     </tbody>
                 </table>
                 <button onClick={() => this.onLogout()}>Logout</button>
-                <NavLink to="/feeds" className="nav-btn">Go to News Feeds</NavLink>
+                <NavLink to="/feeds" className="nav-btn">Go to News Feeds</NavLink> */}
             </div>
         );
     }

@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import '../css/signup.css';
+import Layout from '../components/layout';
 
-class SignupPage extends Component {
+class SignupPage extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            name: 'MR.A',
             register: {
                 name: '',
                 age: '',
@@ -48,10 +50,24 @@ class SignupPage extends Component {
     }
 
     onSubmit = () => {
+        // this.setState({
+        //     name: 'MR.AAAAA'
+        // })
         this.props.history.push('/home', this.state.register);
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log(nextState)
+    //     if (nextState.name == this.state.name) {
+    //         return false
+    //     }
+    //     else {
+    //         return true;
+    //     }
+    // }
+
     render() {
+        console.log('Re-Render is Occuring')
         const states = [
             { name: 'Tamil Nadu', state_code: 'TN' },
             { name: 'Kerala', state_code: 'KL' },
@@ -128,6 +144,9 @@ class SignupPage extends Component {
                 </select>
                 <br></br>
                 <button onClick={() => this.onSubmit()}>Submit</button>
+                <br></br>
+                {/* <h2>The user name is {this.state.name}</h2> */}
+
             </div>
         );
     }
