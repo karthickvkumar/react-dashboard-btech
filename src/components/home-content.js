@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class HomeContent extends Component {
+
+   validateEmail(){
+        return true;
+   }
+
     render() {
         return (
             <div>

@@ -7,7 +7,7 @@ const HeaderComponent = (props) => {
 
     const focus = () => {
         const name = "On Focus";
-        console.log(name)
+        return true
     }
 
     const blur = () => {
