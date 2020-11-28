@@ -53,7 +53,7 @@ class SignupPage extends PureComponent {
         // this.setState({
         //     name: 'MR.AAAAA'
         // })
-        this.props.history.push('/home', this.state.register);
+        this.props.history.push('/parent-child', this.state);
     }
 
     // shouldComponentUpdate(nextProps, nextState) {
