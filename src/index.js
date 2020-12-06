@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import configureStore from './redux/store/createStore';
 
 import SignupPage from './pages/signup-page';
 import HomePage from './pages/home-page';
@@ -10,13 +12,18 @@ import SingleUser from './pages/single-user';
 import PageNotFound from './components/page-not-found';
 import SharingData from './pages/sharing-data';
 import ParentToChild from './pages/parent-to-child';
+import Demo from './pages/demo';
 
 import './index.css';
 
+const store = configureStore();
+
 const App = () => {
   return (
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
       <Switch>
+        {/* <Route path="/" exact component={Demo}></Route> */}
         <Route path="/" exact component={SignupPage}></Route>
         <Route path="/home" component={HomePage}></Route>
         <Route path="/feeds" component={NewsPage}></Route>
@@ -27,6 +34,8 @@ const App = () => {
         <Route component={PageNotFound}></Route>
       </Switch>
     </BrowserRouter>
+  </Provider>
+    
 
   )
 }
